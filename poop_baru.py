@@ -9,8 +9,7 @@ def get_video_link(url):
     try:
         video_id = url.split('/')[-1]
         api_urls = [
-            f'https://api.poophd.com/player.php?id={video_id}',
-            f'https://api.poophd.com/player_old.php?id={video_id}'
+            f'https://api.poophd.com/player.php?id={video_id}'
         ]
         for api_url in api_urls:
             print(f"Fetching: {api_url}")
