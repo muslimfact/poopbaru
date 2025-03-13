@@ -33,6 +33,7 @@ bigwarp_api_key = "1185roh927m637ogi3lv"
 abstream_api_key = "23vj7x7uk12znfyaxc"
 doodstream_api_key = "219725bbkborbourrp2cd4"
 earnvids_api_key = "36517tjrapmevlesh1pq8"
+voesx_api_key = "Wr7fjmWTBp6EY0XGYJZwleaMJiJ2cuf21c3UvSpDd7GtPLAVnQTGiY9RNtwCyCbK"
 
 key = "mysecretkey12345"  # Kunci AES untuk enkripsi
 lulustream_api_endpoint = "https://api.lulustream.com/api/upload/url"
@@ -44,6 +45,7 @@ bigwarp_api_endpoint  = "https://bigwarp.io/api/upload/url"
 abstream_api_endpoint  = "https://abstream.to/api/upload/url"
 doodstream_api_endpoint  = "https://doodapi.com/api/upload/url"
 earnvids_api_endpoint = "https://earnvidsapi.com/api/upload/url"
+voesx_api_endpoint = "https://voe.sx/api/upload/url"
 
 # Variabel untuk menghitung jumlah sukses
 success_count = 0
@@ -56,11 +58,15 @@ try:
         urls = file.readlines()
         urls = [url.strip() for url in urls if url.strip()]  # Remove empty lines and whitespace
 
+    total_urls = len(urls)  # Total link yang akan diproses
+
     # Encrypt each URL and send GET requests to both APIs
-    for url in urls:
+    for index, url in enumerate(urls, start=1):
         # Enkripsi URL
         encrypted = encrypt_url(url, key)
         new_url = f"https://darenx-upbkafe.hf.space/ex/{encrypted}"
+
+        print(f"**=> Processing {index} of {total_urls}...")  # Menampilkan progress
 
         try:
             # doodstream request
@@ -163,7 +169,19 @@ try:
         except Exception as e:
             print(f"Error during abstream request for {url}: {e}")
 
-        print(f"=====> SUCCES UPLOAD KE DropLOAD & Lulustream <============= ")
+        try:
+            url_to_upload = f"{voesx_api_endpoint}?key={voesx_api_key}&url={url}"
+
+            # abstream request
+            response_voesx = httpx.get(url_to_upload)
+            if response_voesx.status_code == 200:
+                success_count += 1
+            else:
+                print(f"Failed: {url} - voesx Response: {response_voesx.status_code} - {response_voesx.text}")
+        except Exception as e:
+            print(f"Error during voesx request for {url}: {e}")
+
+        print(f"==>  {index} of {total_urls} SUCCESS UPLOAD KE DropLOAD & Lulustream  <=====")
 
     # Tampilkan total jumlah sukses
     print("\n=========================================")
