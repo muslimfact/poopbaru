@@ -169,17 +169,7 @@ try:
         except Exception as e:
             print(f"Error during abstream request for {url}: {e}")
 
-        try:
-            url_to_upload = f"{voesx_api_endpoint}?key={voesx_api_key}&url={url}"
-
-            # abstream request
-            response_voesx = httpx.get(url_to_upload)
-            if response_voesx.status_code == 200:
-                success_count += 1
-            else:
-                print(f"Failed: {url} - voesx Response: {response_voesx.status_code} - {response_voesx.text}")
-        except Exception as e:
-            print(f"Error during voesx request for {url}: {e}")
+        
 
         print(f"==>  {index} of {total_urls} SUCCESS UPLOAD KE DropLOAD & Lulustream  <=====")
 
