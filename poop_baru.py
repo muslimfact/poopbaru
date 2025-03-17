@@ -1,6 +1,8 @@
 import requests
 import re
 import concurrent.futures
+from domain_ganti import base_poop_api,poop_slash
+
 
 # Mengosongkan file output_link.txt
 open('output_link.txt', 'w').close()
@@ -9,20 +11,30 @@ def get_video_link(url):
     try:
         video_id = url.split('/')[-1]
         api_urls = [
-            f'https://api.poophd.com/player.php?id={video_id}'
+            f'{base_poop_api}{poop_slash}?id={video_id}'
         ]
         for api_url in api_urls:
             print(f"Fetching: {api_url}")
             headers = {
-                'Referer': 'https://metrolagu.cam/',
-                'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36',
+                'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+                'accept-language': 'id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7',
+                'priority': 'u=0, i',
+                'referer': 'https://metrolagu.cam/',
+                'sec-ch-ua': '"Not A(Brand";v="8", "Chromium";v="132", "Google Chrome";v="132")',
+                'sec-ch-ua-mobile': '?0',
+                'sec-ch-ua-platform': '"Linux"',
+                'sec-fetch-dest': 'iframe',
+                'sec-fetch-mode': 'navigate',
+                'sec-fetch-site': 'cross-site',
+                'sec-fetch-user': '?1',
+                'upgrade-insecure-requests': '1',
+                'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36',
             }
+
             response = requests.get(api_url, headers=headers)
             
-            print(f"Response from {api_url}")  # Debugging
-            
             if response.status_code == 200 and 'player("' in response.text:
-                match = re.search(r'player\("a",\s*".*?",\s*".*?",\s*"(https?://[^"]+)"', response.text)
+                match = re.search(r'player\("a",\s*".*?",\s*".*?",\s*"(\/vstream\?key=[^"]+)"', response.text)
                 if match:
                     video_link = match.group(1)
                     return video_link
@@ -40,7 +52,7 @@ def follow_redirect(video_link):
             'accept-language': 'id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7',
             'priority': 'i',
             'range': 'bytes=0-',
-            'referer': 'https://api.poophd.com/',
+            'referer': f'{base_poop_api}/',
             'sec-ch-ua': '"Not A(Brand";v="8", "Chromium";v="132", "Google Chrome";v="132")',
             'sec-ch-ua-mobile': '?0',
             'sec-ch-ua-platform': '"Linux"',
@@ -51,7 +63,7 @@ def follow_redirect(video_link):
         }
 
         session = requests.Session()
-        response = session.get(video_link, headers=headers, allow_redirects=True)
+        response = session.get(f"{base_poop_api}{video_link}", headers=headers, allow_redirects=True)
 
         if response.history:
             print(f"Redirects: {[res.url for res in response.history]}")
