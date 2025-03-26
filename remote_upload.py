@@ -32,7 +32,7 @@ dropload_api_key = "6228dp9snugc6viw066i"
 bigwarp_api_key = "1185roh927m637ogi3lv"
 abstream_api_key = "23vj7x7uk12znfyaxc"
 doodstream_api_key = "219725bbkborbourrp2cd4"
-earnvids_api_key = "36517tjrapmevlesh1pq8"
+
 voesx_api_key = "Wr7fjmWTBp6EY0XGYJZwleaMJiJ2cuf21c3UvSpDd7GtPLAVnQTGiY9RNtwCyCbK"
 
 key = "mysecretkey12345"  # Kunci AES untuk enkripsi
@@ -44,7 +44,7 @@ dropload_endpoint = "https://dropload.io/api/upload/url"
 bigwarp_api_endpoint  = "https://bigwarp.io/api/upload/url"
 abstream_api_endpoint  = "https://abstream.to/api/upload/url"
 doodstream_api_endpoint  = "https://doodapi.com/api/upload/url"
-earnvids_api_endpoint = "https://earnvidsapi.com/api/upload/url"
+
 voesx_api_endpoint = "https://voe.sx/api/upload/url"
 
 # Variabel untuk menghitung jumlah sukses
@@ -99,16 +99,7 @@ try:
         except Exception as e :
             print(f"Error during StreamHG request for {new_url}: {e}")
 
-        try:
-            # veev request
-            response_veev = httpx.get(veev_api_endpoint, params={"key": veev_api_key, "url": new_url})
-            if response_veev.status_code == 200:
-                success_count += 1
-            else:
-                print(f"Failed: {url} - Veev Response: {response_veev.status_code} - {response_veev.text}")
-        except Exception as e:
-            print(f"Error during Veev request for {new_url}: {e}")
-
+        
         
 
         try:
@@ -145,30 +136,8 @@ try:
         except Exception as e:
             print(f"Error during Vinovo request for {url}: {e}")
 
-        try:
-            url_to_upload = f"{abstream_api_endpoint}?key={abstream_api_key}&url={new_url}"
-
-            # abstream request
-            response_abstream = httpx.get(url_to_upload)
-            if response_abstream.status_code == 200:
-                success_count += 1
-            else:
-                print(f"Failed: {url} - abstream Response: {response_abstream.status_code} - {response_abstream.text}")
-        except Exception as e:
-            print(f"Error during abstream request for {url}: {e}")
-
-        try:
-            url_to_upload = f"{earnvids_api_endpoint}?key={earnvids_api_key}&url={new_url}"
-
-            # abstream request
-            response_earnvid = httpx.get(url_to_upload)
-            if response_earnvid.status_code == 200:
-                success_count += 1
-            else:
-                print(f"Failed: {url} - earnvids Response: {response_earnvid.status_code} - {response_earnvid.text}")
-        except Exception as e:
-            print(f"Error during abstream request for {url}: {e}")
-
+        
+        
         
 
         print(f"==>  {index} of {total_urls} SUCCESS UPLOAD KE DropLOAD & Lulustream  <=====")
