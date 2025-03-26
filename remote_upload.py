@@ -112,17 +112,7 @@ try:
         except Exception as e:
             print(f"Error during Vinovo request for {url}: {e}")
 
-        try:
-            url_to_upload = f"{dropload_endpoint}?key={dropload_api_key}&url={new_url}"
-
-            # dropload request
-            response_dropload = httpx.get(url_to_upload)
-            if response_dropload.status_code == 200:
-                success_count += 1
-            else:
-                print(f"Failed: {url} - Dropload Response: {response_dropload.status_code} - {response_dropload.text}")
-        except Exception as e:
-            print(f"Error during Vinovo request for {url}: {e}")
+        
 
         try:
             url_to_upload = f"{bigwarp_api_endpoint}?key={bigwarp_api_key}&url={new_url}"
