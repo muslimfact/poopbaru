@@ -117,16 +117,27 @@ try:
         try:
             url_to_upload = f"{bigwarp_api_endpoint}?key={bigwarp_api_key}&url={new_url}"
 
-            # dropload request
+            # bigwarp request
             response_bigwarp = httpx.get(url_to_upload)
             if response_bigwarp.status_code == 200:
                 success_count += 1
             else:
                 print(f"Failed: {url} - bigwarp Response: {response_bigwarp.status_code} - {response_bigwarp.text}")
         except Exception as e:
-            print(f"Error during Vinovo request for {url}: {e}")
+            print(f"Error during bigwarp request for {url}: {e}")
 
-        
+        try:
+            url_to_upload = f"{abstream_api_endpoint}?key={abstream_api_key}&url={new_url}"
+
+            # abstream request
+            response_abstream = httpx.get(url_to_upload)
+            if response_abstream.status_code == 200:
+                success_count += 1
+            else:
+                print(f"Failed: {url} - response_abstream Response: {response_abstream.status_code} - {response_abstream.text}")
+        except Exception as e:
+            print(f"Error during response_abstream request for {url}: {e}")
+
         
         
 
