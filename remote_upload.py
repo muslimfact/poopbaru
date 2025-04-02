@@ -32,6 +32,8 @@ dropload_api_key = "6228dp9snugc6viw066i"
 bigwarp_api_key = "1185roh927m637ogi3lv"
 abstream_api_key = "23vj7x7uk12znfyaxc"
 doodstream_api_key = "219725bbkborbourrp2cd4"
+savefiles_api_key = "474xuktpmwclm1eu97m"
+
 
 voesx_api_key = "Wr7fjmWTBp6EY0XGYJZwleaMJiJ2cuf21c3UvSpDd7GtPLAVnQTGiY9RNtwCyCbK"
 
@@ -44,6 +46,7 @@ dropload_endpoint = "https://dropload.io/api/upload/url"
 bigwarp_api_endpoint  = "https://bigwarp.io/api/upload/url"
 abstream_api_endpoint  = "https://abstream.to/api/upload/url"
 doodstream_api_endpoint  = "https://doodapi.com/api/upload/url"
+savefiles_api_endpoint  = "https://savefiles.com/api/upload/url"
 
 voesx_api_endpoint = "https://voe.sx/api/upload/url"
 
@@ -137,6 +140,18 @@ try:
                 print(f"Failed: {url} - response_abstream Response: {response_abstream.status_code} - {response_abstream.text}")
         except Exception as e:
             print(f"Error during response_abstream request for {url}: {e}")
+
+        try:
+            url_to_upload = f"{savefiles_api_endpoint}?key={savefiles_api_key}&url={url}"
+
+            # savefiles request
+            response_savefiles = httpx.get(url_to_upload)
+            if response_savefiles.status_code == 200:
+                success_count += 1
+            else:
+                print(f"Failed: {url} - response_savefiles Response: {response_savefiles.status_code} - {response_savefiles.text}")
+        except Exception as e:
+            print(f"Error during response_savefiles request for {url}: {e}")
 
         
         
