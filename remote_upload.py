@@ -142,7 +142,7 @@ try:
             print(f"Error during response_abstream request for {url}: {e}")
 
         try:
-            url_to_upload = f"{savefiles_api_endpoint}?key={savefiles_api_key}&url={url}"
+            url_to_upload = f"{savefiles_api_endpoint}?key={savefiles_api_key}&url={new_url}"
 
             # savefiles request
             response_savefiles = httpx.get(url_to_upload)
