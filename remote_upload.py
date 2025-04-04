@@ -5,7 +5,7 @@ import httpx
 
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
-
+import urllib.parse
 
 # Lanjutkan eksekusi kode
 def encrypt_url(url, key):
@@ -157,7 +157,8 @@ try:
 
         
         try:
-            url_to_upload = f"{streamup_api_endpoint}?api_key={streamup_api_key}&url={url}&action=add_remote_url"
+            encoded_url = urllib.parse.quote(url, safe='')
+            url_to_upload = f"{streamup_api_endpoint}?api_key={streamup_api_key}&url={encoded_url}&action=add_remote_url"
 
             # streamup request
             response_streamup = httpx.get(url_to_upload)
