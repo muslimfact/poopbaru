@@ -190,7 +190,7 @@ try:
             if response_easyvidplay.status_code == 200:
                 success_count += 1
             else:
-                print(f"Failed: {url} - Status: {response_easyvidplay.status_code} - {response_easyvidplay.text}")
+                print(f"Status: {response_easyvidplay.status_code} - {response_easyvidplay.text} - {url} ")
     
         except Exception as e:
             print(f"Error during easyvidplay request for {url}: {e}")
