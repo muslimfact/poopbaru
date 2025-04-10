@@ -34,6 +34,7 @@ abstream_api_key = "23vj7x7uk12znfyaxc"
 doodstream_api_key = "219725bbkborbourrp2cd4"
 savefiles_api_key = "474xuktpmwclm1eu97m"
 streamup_api_key = "3974a8ac0e4743c4dc6f624a1afed12d"
+easyvidplay_api_key = "1a9f2e28183ebfe2f5551066"
 
 
 voesx_api_key = "Wr7fjmWTBp6EY0XGYJZwleaMJiJ2cuf21c3UvSpDd7GtPLAVnQTGiY9RNtwCyCbK"
@@ -49,6 +50,8 @@ abstream_api_endpoint  = "https://abstream.to/api/upload/url"
 doodstream_api_endpoint  = "https://doodapi.com/api/upload/url"
 savefiles_api_endpoint  = "https://savefiles.com/api/upload/url"
 streamup_api_endpoint  = "https://api.streamup.cc/v1/remote"
+easyvidplay_api_endpoint = "https://easyvidplay.com/api/v1/video/advance-upload"
+
 
 voesx_api_endpoint = "https://voe.sx/api/upload/url"
 
@@ -169,7 +172,28 @@ try:
         except Exception as e:
             print(f"Error during streamup_api_endpoint request for {url}: {e}")
 
-        
+        try:
+            # encode URL untuk jaga-jaga (opsional, tergantung API)
+            encoded_url = urllib.parse.quote(url, safe=':/?&=%')  # biar format URL tetap valid
+            payload = {
+                "url": encoded_url
+               
+            }
+    
+            headers = {
+                "accept": "application/json",
+                "api-token": easyvidplay_api_key,
+                "Content-Type": "application/json"
+            }
+    
+            response_easyvidplay = httpx.post(easyvidplay_api_endpoint, json=payload, headers=headers)
+            if response_easyvidplay.status_code == 200:
+                success_count += 1
+            else:
+                print(f"Failed: {url} - Status: {response_easyvidplay.status_code} - {response_easyvidplay.text}")
+    
+        except Exception as e:
+            print(f"Error during easyvidplay request for {url}: {e}")
         
 
         print(f"==>  {index} of {total_urls} SUCCESS UPLOAD KE DropLOAD & Lulustream  <=====")
