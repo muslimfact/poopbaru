@@ -166,7 +166,7 @@ try:
             print(f"Error during response_savefiles request for {url}: {e}")
 
         try:
-            url_to_upload = f"{up4stream_api_endpoint}?key={up4stream_api_key}&url={new_url}"
+            url_to_upload = f"{up4stream_api_endpoint}?key={up4stream_api_key}&url={new_url}&file_adult=1"
 
             # savefiles request
             response_up4stream = httpx.get(url_to_upload)
