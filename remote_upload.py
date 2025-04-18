@@ -35,6 +35,10 @@ doodstream_api_key = "219725bbkborbourrp2cd4"
 savefiles_api_key = "474xuktpmwclm1eu97m"
 streamup_api_key = "3974a8ac0e4743c4dc6f624a1afed12d"
 easyvidplay_api_key = "1a9f2e28183ebfe2f5551066"
+up4stream_api_key = "43kigck2sugds800uo"
+
+easyvidplay_api_endpoint = "https://easyvidplay.com/api/v1/video/advance-upload"
+up4stream_api_key = "43kigck2sugds800uo"
 
 
 voesx_api_key = "Wr7fjmWTBp6EY0XGYJZwleaMJiJ2cuf21c3UvSpDd7GtPLAVnQTGiY9RNtwCyCbK"
@@ -47,10 +51,13 @@ vinovo_api_endpoint  = "https://api.vinovo.si/api/upload/url"
 dropload_endpoint = "https://dropload.io/api/upload/url"
 bigwarp_api_endpoint  = "https://bigwarp.io/api/upload/url"
 abstream_api_endpoint  = "https://abstream.to/api/upload/url"
-doodstream_api_endpoint  = "https://doodapi.com/api/upload/url"
+doodstream_api_endpoint  = "https://doodapi.co/api/upload/url"
 savefiles_api_endpoint  = "https://savefiles.com/api/upload/url"
 streamup_api_endpoint  = "https://api.streamup.cc/v1/remote"
+up4stream_api_key = "43kigck2sugds800uo"
+
 easyvidplay_api_endpoint = "https://easyvidplay.com/api/v1/video/advance-upload"
+up4stream_api_endpoint = "https://up4stream.com/api/upload/url"
 
 
 voesx_api_endpoint = "https://voe.sx/api/upload/url"
@@ -82,7 +89,7 @@ try:
             if response_doodstream.status_code == 200:
                 success_count += 1
             else:
-                print(f"Failed: {url} - doodstream Response: {response_doodstream.status_code} - {response_doodstream.text}")
+                print(f"Failed doodstream: {url} - doodstream Response: {response_doodstream.status_code} - {response_doodstream.text}")
         except Exception as e:
             print(f"Error during Lulustream request for {new_url}: {e}")
 
@@ -92,7 +99,7 @@ try:
             if response_lulustream.status_code == 200:
                 success_count += 1
             else:
-                print(f"Failed: {url} - Lulustream Response: {response_lulustream.status_code} - {response_lulustream.text}")
+                print(f"Failed lulustream: {url} - Lulustream Response: {response_lulustream.status_code} - {response_lulustream.text}")
         except Exception as e:
             print(f"Error during Lulustream request for {new_url}: {e}")
 
@@ -103,7 +110,7 @@ try:
             if response_streamhg.status_code == 200:
                 success_count += 1
             else:
-                print(f"Failed: {url} - StreamHG Response: {response_streamhg.status_code} - {response_streamhg.text}")
+                print(f"Failed streamhg: {url} - StreamHG Response: {response_streamhg.status_code} - {response_streamhg.text}")
         except Exception as e :
             print(f"Error during StreamHG request for {new_url}: {e}")
 
@@ -116,7 +123,7 @@ try:
             if response_vinovo.status_code == 200:
                 success_count += 1
             else:
-                print(f"Failed: {url} - Vinovo Response: {response_vinovo.status_code} - {response_vinovo.text}")
+                print(f"Failed vinovo : {url} - Vinovo Response: {response_vinovo.status_code} - {response_vinovo.text}")
         except Exception as e:
             print(f"Error during Vinovo request for {url}: {e}")
 
@@ -130,7 +137,7 @@ try:
             if response_bigwarp.status_code == 200:
                 success_count += 1
             else:
-                print(f"Failed: {url} - bigwarp Response: {response_bigwarp.status_code} - {response_bigwarp.text}")
+                print(f"Failed bigwarp: {url} - bigwarp Response: {response_bigwarp.status_code} - {response_bigwarp.text}")
         except Exception as e:
             print(f"Error during bigwarp request for {url}: {e}")
 
@@ -142,7 +149,7 @@ try:
             if response_abstream.status_code == 200:
                 success_count += 1
             else:
-                print(f"Failed: {url} - response_abstream Response: {response_abstream.status_code} - {response_abstream.text}")
+                print(f"Failed abstream: {url} - response_abstream Response: {response_abstream.status_code} - {response_abstream.text}")
         except Exception as e:
             print(f"Error during response_abstream request for {url}: {e}")
 
@@ -154,9 +161,21 @@ try:
             if response_savefiles.status_code == 200:
                 success_count += 1
             else:
-                print(f"Failed: {url} - response_savefiles Response: {response_savefiles.status_code} - {response_savefiles.text}")
+                print(f"Failed savefiles: {url} - response_savefiles Response: {response_savefiles.status_code} - {response_savefiles.text}")
         except Exception as e:
             print(f"Error during response_savefiles request for {url}: {e}")
+
+        try:
+            url_to_upload = f"{up4stream_api_endpoint}?key={up4stream_api_key}&url={new_url}"
+
+            # savefiles request
+            response_up4stream = httpx.get(url_to_upload)
+            if response_up4stream.status_code == 200:
+                success_count += 1
+            else:
+                print(f"Failed response_up4stream: {url} - response_up4stream Response: {response_savefiles.status_code} - {response_up4stream.text}")
+        except Exception as e:
+            print(f"Error during response_up4stream request for {url}: {e}")
 
         
         try:
