@@ -33,7 +33,7 @@ bigwarp_api_key = "1185roh927m637ogi3lv"
 abstream_api_key = "23vj7x7uk12znfyaxc"
 doodstream_api_key = "219725bbkborbourrp2cd4"
 savefiles_api_key = "474xuktpmwclm1eu97m"
-streamup_api_key = "3974a8ac0e4743c4dc6f624a1afed12d"
+streamup_api_key = "9e589c7f3e1909e56a0f43207c320223"
 easyvidplay_api_key = "1a9f2e28183ebfe2f5551066"
 up4stream_api_key = "43kigck2sugds800uo"
 
