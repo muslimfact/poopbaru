@@ -1,3 +1,3 @@
-domain_ganti = "https://poop.vision"
+domain_ganti = "https://poop.ong"
 base_poop_api = "https://poophd.video-src.com"
 poop_slash  = "/vplayer"
