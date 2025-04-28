@@ -24,43 +24,31 @@ def encrypt_url(url, key):
     return encrypted_base64
 
 # API Keys
-lulustream_api_key = '936yclje4cl5mud6kcw'  # Lulustream API Key
 streamhg_api_key = "2426evezy9bm5xz0uzzy"
-veev_api_key = "81wfq1eryrdlombkfrej2ldx08p092x1rw"
 vinovo_api_key = "8b857a827319ed70f22e4d0668853f"
-dropload_api_key = "6228dp9snugc6viw066i"
 bigwarp_api_key = "1185roh927m637ogi3lv"
 abstream_api_key = "23vj7x7uk12znfyaxc"
 doodstream_api_key = "219725bbkborbourrp2cd4"
-savefiles_api_key = "474xuktpmwclm1eu97m"
-streamup_api_key = "9e589c7f3e1909e56a0f43207c320223"
 easyvidplay_api_key = "1a9f2e28183ebfe2f5551066"
 up4stream_api_key = "43kigck2sugds800uo"
 
-easyvidplay_api_endpoint = "https://easyvidplay.com/api/v1/video/advance-upload"
-up4stream_api_key = "43kigck2sugds800uo"
-
-
+streambolt_api_key = "45b47yxsudl0zl817g"
 voesx_api_key = "Wr7fjmWTBp6EY0XGYJZwleaMJiJ2cuf21c3UvSpDd7GtPLAVnQTGiY9RNtwCyCbK"
 
 key = "mysecretkey12345"  # Kunci AES untuk enkripsi
-lulustream_api_endpoint = "https://api.lulustream.com/api/upload/url"
+
+
+
 streamhg_api_endpoint = "https://streamhgapi.com/api/upload/url"
-veev_api_endpoint  = "https://veev.to/api/upload/url"
 vinovo_api_endpoint  = "https://api.vinovo.si/api/upload/url"
-dropload_endpoint = "https://dropload.io/api/upload/url"
 bigwarp_api_endpoint  = "https://bigwarp.io/api/upload/url"
 abstream_api_endpoint  = "https://abstream.to/api/upload/url"
 doodstream_api_endpoint  = "https://doodapi.co/api/upload/url"
-savefiles_api_endpoint  = "https://savefiles.com/api/upload/url"
-streamup_api_endpoint  = "https://api.streamup.cc/v1/remote"
-up4stream_api_key = "43kigck2sugds800uo"
-
 easyvidplay_api_endpoint = "https://easyvidplay.com/api/v1/video/advance-upload"
-up4stream_api_endpoint = "https://up4stream.com/api/upload/url"
-
+streambolt_api_endpoint  = "https://streambolt.tv/api/upload/url"
 
 voesx_api_endpoint = "https://voe.sx/api/upload/url"
+
 
 # Variabel untuk menghitung jumlah sukses
 success_count = 0
@@ -93,16 +81,7 @@ try:
         except Exception as e:
             print(f"Error during Lulustream request for {new_url}: {e}")
 
-        try:
-            # Lulustream request
-            response_lulustream = httpx.get(lulustream_api_endpoint, params={"key": lulustream_api_key, "url": new_url})
-            if response_lulustream.status_code == 200:
-                success_count += 1
-            else:
-                print(f"Failed lulustream: {url} - Lulustream Response: {response_lulustream.status_code} - {response_lulustream.text}")
-        except Exception as e:
-            print(f"Error during Lulustream request for {new_url}: {e}")
-
+        
         
         try:
             # streamhg request
@@ -154,42 +133,16 @@ try:
             print(f"Error during response_abstream request for {url}: {e}")
 
         try:
-            url_to_upload = f"{savefiles_api_endpoint}?key={savefiles_api_key}&url={new_url}"
+            url_to_upload = f"{streambolt_api_endpoint}?key={streambolt_api_key}&url={new_url}"
 
-            # savefiles request
-            response_savefiles = httpx.get(url_to_upload)
-            if response_savefiles.status_code == 200:
+            # streambolt request
+            response_streambolt = httpx.get(url_to_upload)
+            if response_streambolt.status_code == 200:
                 success_count += 1
             else:
-                print(f"Failed savefiles: {url} - response_savefiles Response: {response_savefiles.status_code} - {response_savefiles.text}")
+                print(f"Failed streambolt: {url} - response_streambolt Response: {response_streambolt.status_code} - {response_streambolt.text}")
         except Exception as e:
-            print(f"Error during response_savefiles request for {url}: {e}")
-
-        try:
-            url_to_upload = f"{up4stream_api_endpoint}?key={up4stream_api_key}&url={new_url}&file_adult=1"
-
-            # savefiles request
-            response_up4stream = httpx.get(url_to_upload)
-            if response_up4stream.status_code == 200:
-                success_count += 1
-            else:
-                print(f"Failed response_up4stream: {url} - response_up4stream Response: {response_savefiles.status_code} - {response_up4stream.text}")
-        except Exception as e:
-            print(f"Error during response_up4stream request for {url}: {e}")
-
-        
-        try:
-            encoded_url = urllib.parse.quote(url, safe='')
-            url_to_upload = f"{streamup_api_endpoint}?api_key={streamup_api_key}&url={encoded_url}&action=add_remote_url"
-
-            # streamup request
-            response_streamup = httpx.get(url_to_upload)
-            if response_streamup.status_code == 200:
-                success_count += 1
-            else:
-                print(f"Failed: {url} - streamup_api_endpoint Response: {response_streamup.status_code} - {response_streamup.text}")
-        except Exception as e:
-            print(f"Error during streamup_api_endpoint request for {url}: {e}")
+            print(f"Error during response_streambolt request for {url}: {e}")
 
         try:
             # encode URL untuk jaga-jaga (opsional, tergantung API)
