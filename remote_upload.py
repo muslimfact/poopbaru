@@ -30,9 +30,8 @@ bigwarp_api_key = "1185roh927m637ogi3lv"
 abstream_api_key = "23vj7x7uk12znfyaxc"
 doodstream_api_key = "219725bbkborbourrp2cd4"
 easyvidplay_api_key = "1a9f2e28183ebfe2f5551066"
-up4stream_api_key = "43kigck2sugds800uo"
+turbostream_api_key = "98a5744ffbd3c2a63e0f61a37b3661f0f73b16b281da8fda8ade989dd93e76fe"
 
-streambolt_api_key = "45b47yxsudl0zl817g"
 voesx_api_key = "Wr7fjmWTBp6EY0XGYJZwleaMJiJ2cuf21c3UvSpDd7GtPLAVnQTGiY9RNtwCyCbK"
 
 key = "mysecretkey12345"  # Kunci AES untuk enkripsi
@@ -45,7 +44,7 @@ bigwarp_api_endpoint  = "https://bigwarp.io/api/upload/url"
 abstream_api_endpoint  = "https://abstream.to/api/upload/url"
 doodstream_api_endpoint  = "https://doodapi.co/api/upload/url"
 easyvidplay_api_endpoint = "https://easyvidplay.com/api/v1/video/advance-upload"
-streambolt_api_endpoint  = "https://streambolt.tv/api/upload/url"
+turbostream_api_endpoint  = "https://turbostream.tv/api/remote_upload.php"
 
 voesx_api_endpoint = "https://voe.sx/api/upload/url"
 
@@ -133,17 +132,24 @@ try:
             print(f"Error during response_abstream request for {url}: {e}")
 
         try:
-            url_to_upload = f"{streambolt_api_endpoint}?key={streambolt_api_key}&url={new_url}"
+            headers = {
+                "Authorization": f"Bearer {turbostream_api_key}",
+                "Content-Type": "application/json"
+            }
 
-            # streambolt request
-            response_streambolt = httpx.get(url_to_upload)
-            if response_streambolt.status_code == 200:
+            payload = {
+                "url": url  # gunakan original URL bukan encrypted
+            }
+
+            response_turbostream = httpx.post(turbostream_api_endpoint, headers=headers, json=payload)
+            if response_turbostream.status_code == 200:
                 success_count += 1
             else:
-                print(f"Failed streambolt: {url} - response_streambolt Response: {response_streambolt.status_code} - {response_streambolt.text}")
+                print(f"Failed turbostream: {url} - Turbostream Response: {response_turbostream.status_code} - {response_turbostream.text}")
         except Exception as e:
-            print(f"Error during response_streambolt request for {url}: {e}")
+            print(f"Error during Turbostream request for {url}: {e}")
 
+       
         try:
             # encode URL untuk jaga-jaga (opsional, tergantung API)
             encoded_url = urllib.parse.quote(url, safe=':/?&=%')  # biar format URL tetap valid
