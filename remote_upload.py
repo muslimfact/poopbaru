@@ -131,23 +131,23 @@ try:
         except Exception as e:
             print(f"Error during response_abstream request for {url}: {e}")
 
-        try:
-            headers = {
-                "Authorization": f"Bearer {turbostream_api_key}",
-                "Content-Type": "application/json"
-            }
+        #try:
+        #    headers = {
+        #       "Authorization": f"Bearer {turbostream_api_key}",
+        #        "Content-Type": "application/json"
+        #    }
 
-            payload = {
-                "url": url  # gunakan original URL bukan encrypted
-            }
+        #    payload = {
+        #        "url": url  # gunakan original URL bukan encrypted
+        #    }
 
-            response_turbostream = httpx.post(turbostream_api_endpoint, headers=headers, json=payload)
-            if response_turbostream.status_code == 200:
-                success_count += 1
-            else:
-                print(f"Failed turbostream: {url} - Turbostream Response: {response_turbostream.status_code} - {response_turbostream.text}")
-        except Exception as e:
-            print(f"Error during Turbostream request for {url}: {e}")
+        #    response_turbostream = httpx.post(turbostream_api_endpoint, headers=headers, json=payload)
+        #    if response_turbostream.status_code == 200:
+        #        success_count += 1
+        #    else:
+        #        print(f"Failed turbostream: {url} - Turbostream Response: {response_turbostream.status_code} - {response_turbostream.text}")
+        #except Exception as e:
+        #    print(f"Error during Turbostream request for {url}: {e}")
 
        
         try:
