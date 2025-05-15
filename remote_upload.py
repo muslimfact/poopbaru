@@ -82,16 +82,7 @@ try:
 
         
         
-        try:
-            # streamhg request
-            response_streamhg = httpx.get(streamhg_api_endpoint, params={"key": streamhg_api_key, "url": new_url})
-            if response_streamhg.status_code == 200:
-                success_count += 1
-            else:
-                print(f"Failed streamhg: {url} - StreamHG Response: {response_streamhg.status_code} - {response_streamhg.text}")
-        except Exception as e :
-            print(f"Error during StreamHG request for {new_url}: {e}")
-
+        
         
         
 
