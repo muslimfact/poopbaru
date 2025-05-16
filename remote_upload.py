@@ -81,7 +81,7 @@ try:
 
         try:
             # streamup request
-            response_streamup = httpx.get(streamup_api_endpoint, params={"api_key": streamup_api_key, "url": url})
+            response_streamup = httpx.get(streamup_api_endpoint, params={"api_key": streamup_api_key, "url": url,"action":add_remote_url})
             if response_streamup.status_code == 200:
                 success_count += 1
             else:
