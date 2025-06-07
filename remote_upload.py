@@ -41,7 +41,7 @@ key = "mysecretkey12345"  # Kunci AES untuk enkripsi
 
 vinovo_api_endpoint  = "https://api.vinovo.si/api/upload/url"
 bigwarp_api_endpoint  = "https://bigwarp.io/api/upload/url"
-doodstream_api_endpoint  = "https://doodapi.co/api/upload/url"
+doodstream_api_endpoint  = "https://doodapi.com/api/upload/url"
 easyvidplay_api_endpoint = "https://easyvidplay.com/api/v1/video/advance-upload"
 streamup_api_endpoint = "https://api.streamup.cc/v1/remote"
 
@@ -71,7 +71,7 @@ try:
 
         try:
             # doodstream request
-            response_doodstream= httpx.get(doodstream_api_endpoint, params={"key": doodstream_api_key, "url": new_url})
+            response_doodstream= httpx.get(doodstream_api_endpoint, params={"key": doodstream_api_key, "url": url})
             if response_doodstream.status_code == 200:
                 success_count += 1
             else:
@@ -100,7 +100,7 @@ try:
         
 
         try:
-            url_to_upload = f"{bigwarp_api_endpoint}?key={bigwarp_api_key}&url={new_url}"
+            url_to_upload = f"{bigwarp_api_endpoint}?key={bigwarp_api_key}&url={url}"
 
             # bigwarp request
             response_bigwarp = httpx.get(url_to_upload)
