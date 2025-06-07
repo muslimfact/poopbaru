@@ -77,7 +77,7 @@ try:
             else:
                 print(f"Failed doodstream: {url} - doodstream Response: {response_doodstream.status_code} - {response_doodstream.text}")
         except Exception as e:
-            print(f"Error during Lulustream request for {new_url}: {e}")
+            print(f"Error during dood tream request for {new_url}: {e}")
 
         
         
