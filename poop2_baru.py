@@ -53,6 +53,8 @@ except Exception as e:
     links = []
 
 # Menyimpan hasil ke output_link.txt
+proxy_url = "https://darenx-upbkafe.hf.space/download?url="
+
 try:
     total_links = len(links)
     with open('output_link.txt', 'w') as output_file:
@@ -63,7 +65,8 @@ try:
                 print(f"Proses {index + 1} dari {total_links}")
                 video_link = get_video_link(link)
                 if video_link:
-                    output_file.write(video_link + '\n')
+                    # output_file.write(video_link + '\n')
+                    output_file.write(f"{proxy_url}{video_link}\n")
                     print(f"{video_link}\n")
                     found_links.append(video_link)
 
