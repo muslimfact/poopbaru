@@ -57,9 +57,8 @@ success_count = 0
 try:
     with open('output_link.txt', 'r') as file:
         urls = file.readlines()
-        # urls = [url.strip() for url in urls if url.strip()]  # Remove empty lines and whitespace
-        urls = [f"https://darenx-upbkafe.hf.space/download?url={url.strip()}" for url in urls if url.strip()]
-    
+        urls = [url.strip() for url in urls if url.strip()]  # Remove empty lines and whitespace
+        
     total_urls = len(urls)  # Total link yang akan diproses
 
     # Encrypt each URL and send GET requests to both APIs
