@@ -63,9 +63,8 @@ try:
 
     # Encrypt each URL and send GET requests to both APIs
     for index, url in enumerate(urls, start=1):
-        # Enkripsi URL
-        encrypted = encrypt_url(url, key)
-        new_url = f"https://darenx-upbkafe.hf.space/ex/{encrypted}"
+       
+        url = f"https://darenx-upbkafe.hf.space/download?url={url}"
 
         print(f"**=> Processing {index} of {total_urls}...")  # Menampilkan progress
 
@@ -77,7 +76,7 @@ try:
             else:
                 print(f"Failed doodstream: {url} - doodstream Response: {response_doodstream.status_code} - {response_doodstream.text}")
         except Exception as e:
-            print(f"Error during dood tream request for {new_url}: {e}")
+            print(f"Error during dood tream request for {url}: {e}")
 
         
         
