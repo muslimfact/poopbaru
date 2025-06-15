@@ -53,7 +53,7 @@ except Exception as e:
     links = []
 
 # Menyimpan hasil ke output_link.txt
-proxy_url = "https://darenx-upbkafe.hf.space/download?url="
+proxy_url = "https://darenx-upbkafe.hf.space/vinovovoe?url="
 
 try:
     total_links = len(links)
