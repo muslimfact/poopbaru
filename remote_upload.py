@@ -31,6 +31,7 @@ bigwarp_api_key = "1185roh927m637ogi3lv"
 doodstream_api_key = "219725bbkborbourrp2cd4"
 easyvidplay_api_key = "1a9f2e28183ebfe2f5551066"
 streamup_api_key = "71defff7b74869da23c8e1c905bb8594"
+turboviplay_api_key = "dmVzypf4rw"
 
 voesx_api_key = "Wr7fjmWTBp6EY0XGYJZwleaMJiJ2cuf21c3UvSpDd7GtPLAVnQTGiY9RNtwCyCbK"
 
@@ -44,6 +45,8 @@ bigwarp_api_endpoint  = "https://bigwarp.io/api/upload/url"
 doodstream_api_endpoint  = "https://doodapi.com/api/upload/url"
 easyvidplay_api_endpoint = "https://easyvidplay.com/api/v1/video/advance-upload"
 streamup_api_endpoint = "https://api.streamup.cc/v1/remote"
+turboviplay_api_endpoint = "https://api.turboviplay.com/uploadUrl"
+
 
 voesx_api_endpoint = "https://voe.sx/api/upload/url"
 
@@ -74,6 +77,16 @@ try:
                 success_count += 1
             else:
                 print(f"Failed doodstream: {url} - doodstream Response: {response_doodstream.status_code} - {response_doodstream.text}")
+        except Exception as e:
+            print(f"Error during dood tream request for {url}: {e}")
+
+        try:
+            # turboviplay request
+            response_turboviplay= httpx.get(turboviplay_api_endpoint, params={"keyApi": turboviplay_api_key, "url": url})
+            if response_doodstream.status_code == 200:
+                success_count += 1
+            else:
+                print(f"Failed turboviplay: {url} -  Response: {response_turboviplay.status_code} - {response_turboviplay.text}")
         except Exception as e:
             print(f"Error during dood tream request for {url}: {e}")
 
