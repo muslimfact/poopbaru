@@ -32,6 +32,8 @@ doodstream_api_key = "219725bbkborbourrp2cd4"
 easyvidplay_api_key = "1a9f2e28183ebfe2f5551066"
 streamup_api_key = "71defff7b74869da23c8e1c905bb8594"
 turboviplay_api_key = "dmVzypf4rw"
+supervideo_api_key = "23340dcqtuv4z5l4fgj89"
+
 
 voesx_api_key = "Wr7fjmWTBp6EY0XGYJZwleaMJiJ2cuf21c3UvSpDd7GtPLAVnQTGiY9RNtwCyCbK"
 
@@ -46,6 +48,7 @@ doodstream_api_endpoint  = "https://doodapi.com/api/upload/url"
 easyvidplay_api_endpoint = "https://easyvidplay.com/api/v1/video/advance-upload"
 streamup_api_endpoint = "https://api.streamup.cc/v1/remote"
 turboviplay_api_endpoint = "https://api.turboviplay.com/uploadUrl"
+supervideo_api_endpoint = "https://supervideo.cc/api/upload/url"
 
 
 voesx_api_endpoint = "https://voe.sx/api/upload/url"
@@ -79,6 +82,17 @@ try:
                 print(f"Failed doodstream: {url} - doodstream Response: {response_doodstream.status_code} - {response_doodstream.text}")
         except Exception as e:
             print(f"Error during dood tream request for {url}: {e}")
+
+        try:
+            # supervideo request
+            response_supervideo= httpx.get(supervideo_api_endpoint, params={"key": supervideo_api_key, "url": url,"adult":"1"})
+            if response_supervideo.status_code == 200:
+                success_count += 1
+            else:
+                print(f"Failed supervideo: {url} - supervideo Response: {response_supervideo.status_code} - {response_supervideo.text}")
+        except Exception as e:
+            print(f"Error during supervideo request for {url}: {e}")
+
 
         try:
             # turboviplay request
