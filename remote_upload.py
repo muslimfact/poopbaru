@@ -83,16 +83,7 @@ try:
         except Exception as e:
             print(f"Error during dood tream request for {url}: {e}")
 
-        try:
-            # supervideo request
-            response_supervideo= httpx.get(supervideo_api_endpoint, params={"key": supervideo_api_key, "url": url,"adult":"1"})
-            if response_supervideo.status_code == 200:
-                success_count += 1
-            else:
-                print(f"Failed supervideo: {url} - supervideo Response: {response_supervideo.status_code} - {response_supervideo.text}")
-        except Exception as e:
-            print(f"Error during supervideo request for {url}: {e}")
-
+        
 
         try:
             # turboviplay request
