@@ -32,7 +32,7 @@ doodstream_api_key = "219725bbkborbourrp2cd4"
 easyvidplay_api_key = "1a9f2e28183ebfe2f5551066"
 streamup_api_key = "71defff7b74869da23c8e1c905bb8594"
 turboviplay_api_key = "dmVzypf4rw"
-supervideo_api_key = "23340dcqtuv4z5l4fgj89"
+dropload_api_key = "7708en799hmmz0y3hafh"
 
 
 voesx_api_key = "Wr7fjmWTBp6EY0XGYJZwleaMJiJ2cuf21c3UvSpDd7GtPLAVnQTGiY9RNtwCyCbK"
@@ -48,7 +48,7 @@ doodstream_api_endpoint  = "https://doodapi.com/api/upload/url"
 easyvidplay_api_endpoint = "https://easyvidplay.com/api/v1/video/advance-upload"
 streamup_api_endpoint = "https://api.streamup.cc/v1/remote"
 turboviplay_api_endpoint = "https://api.turboviplay.com/uploadUrl"
-supervideo_api_endpoint = "https://supervideo.cc/api/upload/url"
+dropload_api_endpoint = "https://dropload.io/api/upload/url"
 
 
 voesx_api_endpoint = "https://voe.sx/api/upload/url"
@@ -83,7 +83,16 @@ try:
         except Exception as e:
             print(f"Error during dood tream request for {url}: {e}")
 
-        
+        try:
+            # dropload request
+            response_dropload= httpx.get(dropload_api_endpoint, params={"key": dropload_api_key, "url": url,"file_adult":1})
+            if response_dropload.status_code == 200:
+                success_count += 1
+            else:
+                print(f"Failed dreopload: {url} - dropload Response: {response_dropload.status_code} - {response_dropload.text}")
+        except Exception as e:
+            print(f"Error during dropload  request for {url}: {e}")
+
 
         try:
             # turboviplay request
