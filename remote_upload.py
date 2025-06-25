@@ -94,16 +94,7 @@ try:
             print(f"Error during dropload  request for {url}: {e}")
 
 
-        try:
-            # turboviplay request
-            response_turboviplay= httpx.get(turboviplay_api_endpoint, params={"keyApi": turboviplay_api_key, "url": url})
-            if response_doodstream.status_code == 200:
-                success_count += 1
-            else:
-                print(f"Failed turboviplay: {url} -  Response: {response_turboviplay.status_code} - {response_turboviplay.text}")
-        except Exception as e:
-            print(f"Error during dood tream request for {url}: {e}")
-
+        
         
         
         
