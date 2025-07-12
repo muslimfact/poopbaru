@@ -19,7 +19,7 @@ def get_video_link(url):
                 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
                 'accept-language': 'id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7',
                 'priority': 'u=0, i',
-                'referer': 'https://videq.dev/',
+                'referer': 'https://videq.online/',
                 'sec-ch-ua': '"Not A(Brand";v="8", "Chromium";v="132", "Google Chrome";v="132")',
                 'sec-ch-ua-mobile': '?0',
                 'sec-ch-ua-platform': '"Linux"',
