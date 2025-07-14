@@ -1,3 +1,4 @@
+import requests
 import re
 import concurrent.futures
 from domain_ganti import base_poop_api,poop_slash,domain_ganti
