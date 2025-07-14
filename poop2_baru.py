@@ -1,4 +1,3 @@
-import requests
 import re
 import concurrent.futures
 from domain_ganti import base_poop_api,poop_slash,domain_ganti
@@ -15,25 +14,27 @@ def get_video_link(url):
         ]
         for api_url in api_urls:
             print(f"Fetching: {api_url}")
+            # ❌ Sebelumnya: headers agak berbeda (Linux, Chrome 132, dll)
+            # ✅ Diganti dengan versi yang sama persis dengan fetch/curl yang berhasil
             headers = {
-                'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-                'accept-language': 'id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7',
-                'priority': 'u=0, i',
-                'referer': domain_ganti,
-                'sec-ch-ua': '"Not A(Brand";v="8", "Chromium";v="132", "Google Chrome";v="132")',
-                'sec-ch-ua-mobile': '?0',
-                'sec-ch-ua-platform': '"Linux"',
-                'sec-fetch-dest': 'iframe',
-                'sec-fetch-mode': 'navigate',
-                'sec-fetch-site': 'cross-site',
-                'sec-fetch-user': '?1',
-                'upgrade-insecure-requests': '1',
-                'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36',
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                "accept-language": "en-US,en;q=0.9,id;q=0.8",
+                "sec-ch-ua": "\"Not_A Brand\";v=\"99\", \"Google Chrome\";v=\"109\", \"Chromium\";v=\"109\"",
+                "sec-ch-ua-mobile": "?0",
+                "sec-ch-ua-platform": "\"Windows\"",
+                "sec-fetch-dest": "iframe",
+                "sec-fetch-mode": "navigate",
+                "sec-fetch-site": "cross-site",
+                "upgrade-insecure-requests": "1",
+                "Referer": domain_ganti,  # tetap pakai domain_ganti yang benar
+                "Referrer-Policy": "strict-origin-when-cross-origin",
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
             }
+
 
             response = requests.get(api_url, headers=headers)
             if response.status_code == 200 and 'player("' in response.text:
-                match = re.search(r'player\("a",\s*"(.*?)",\s*"(.*?)",\s*"(https?://[^"]+\.mp4)"\)', response.text)
+                match = re.search(r'player\("a",\s*"(.*?)",\s*"(.*?)",\s*"(https?://[^"]+)"\)', response.text)
                 if match:
                     video_link = match.group(3)
                     return video_link
