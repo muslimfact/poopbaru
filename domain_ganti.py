@@ -1,3 +1,3 @@
-domain_ganti = "https://mvideq.pro"
+domain_ganti = "https://vid.skin"
 base_poop_api = "https://poophd.video-src.com"
 poop_slash  = "/vplayer"
