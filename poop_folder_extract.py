@@ -1,6 +1,6 @@
 import requests
 import re
-from domain_ganti import domain_ganti
+#from domain_ganti import domain_ganti
 from urllib.parse import urlparse
 
 def ganti_domain(link):
