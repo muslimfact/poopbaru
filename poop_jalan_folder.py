@@ -10,8 +10,8 @@ proses1 = subprocess.run(["python3", "poop_folder_extract.py"], check=True)
 
 
 
-print("Menjalankan poop_baru.py...")
-proses5 = subprocess.run(["python3", "poop2_baru.py"], check=True)
+#print("Menjalankan poop_baru.py...")
+#proses5 = subprocess.run(["python3", "poop2_baru.py"], check=True)
 
 # Menjalankan remote_upload.py setelah poop_baru.py selesai
 #print("Menjalankan remote_upload.py...")
